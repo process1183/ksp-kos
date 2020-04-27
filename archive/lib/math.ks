@@ -16,3 +16,14 @@ function map {
 
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min.
 }
+
+
+// vis-viva equation
+// https://en.wikipedia.org/wiki/Vis-viva_equation
+function vis_viva {
+    parameter u. // standard gravitational parameter
+    parameter r. // distance at which the speed is to be calculated
+    parameter a. // length of the semi-major axis of the elliptical orbit
+
+    return sqrt(u * (2/r - 1/a)).
+}
