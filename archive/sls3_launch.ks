@@ -43,7 +43,7 @@ stage. // Stage 2, Decouple SRBs and activate Terrier LFE
 
 // Point ship to prograde, keeping current roll value
 // https://ksp-kos.github.io/KOS/math/direction.html#function:LOOKDIRUP
-lock steering to lookdirup(ship:prograde:vector, ship:facing:topvector).
+lock steering to lookdirup(ship:srfprograde:vector, ship:facing:topvector).
 
 set wait_alt to 70_000.
 print "Waiting until altitude is above " + wait_alt + "m...".
