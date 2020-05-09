@@ -6,6 +6,7 @@
 set launch_script to "launch.ks".
 set to_copy to lexicon().
 to_copy:add("sls3_launch.ks", launch_script).
+to_copy:add("circularize_orbit.ks", "circularize_orbit.ks").
 
 runpath("0:/common_boot.ks", to_copy).
 

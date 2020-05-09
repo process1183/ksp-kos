@@ -65,3 +65,5 @@ sas on.
 wait 0.5.
 set sasmode to "prograde".
 print "SAS set to '" + sasmode + "'.".
+
+runpath("/circularize_orbit.ks").
