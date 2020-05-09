@@ -1,7 +1,7 @@
 // Shared boot code for ships. Not placed in /boot to avoid being presented
 // as a boot option in-game.
-// Copyright (C) 2020  Josh Gadeken
 // https://github.com/process1183/ksp-kos
+// Copyright (C) 2020  Josh Gadeken
 // License: GPLv3
 
 // Lexicon of source archive file names and destination ship file names.

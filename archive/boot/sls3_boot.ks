@@ -1,6 +1,6 @@
 // Boot script for the SLS III
-// Copyright (C) 2020  Josh Gadeken
 // https://github.com/process1183/ksp-kos
+// Copyright (C) 2020  Josh Gadeken
 // License: GPLv3
 
 
