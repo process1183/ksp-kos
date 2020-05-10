@@ -15,8 +15,6 @@ parameter incl_lib is true.
 
 print "Initializing " + ship:name + "...".
 
-copy_files:add("common_boot.ks", "common_boot.ks").
-
 if incl_lib {
     // https://ksp-kos.github.io/KOS/commands/files.html#copypath-frompath-topath
     copy_files:add("lib/", "lib/").
