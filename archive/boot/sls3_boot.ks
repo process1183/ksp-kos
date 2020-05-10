@@ -4,12 +4,21 @@
 // License: GPLv3
 
 set launch_script to "launch.ks".
-set to_copy to lexicon().
-to_copy:add("sls3_launch.ks", launch_script).
-to_copy:add("circularize_orbit.ks", "circularize_orbit.ks").
 
-runpath("0:/firstboot.ks", to_copy).
+// Only run firstboot when on launchpad or runway
+if ship:status = "prelaunch" {
+    set to_copy to lexicon().
+    to_copy:add("sls3_launch.ks", launch_script).
+    to_copy:add("circularize_orbit.ks", "circularize_orbit.ks").
 
-print "Press ENTER to launch " + ship:name.
-wait until terminal:input:getchar() = terminal:input:RETURN.
-runpath(launch_script).
+    runpath("0:/firstboot.ks", to_copy).
+}
+
+print ship:name + " ready.".
+
+// Run launch script if on launchpad or runway
+if ship:status = "prelaunch" {
+    print "Press ENTER to launch " + ship:name.
+    wait until terminal:input:getchar() = terminal:input:RETURN.
+    runpath(launch_script).
+}
