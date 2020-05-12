@@ -3,13 +3,14 @@
 // Copyright (C) 2020  Josh Gadeken
 // License: GPLv3
 
-set launch_script to "launch.ks".
+set launch_script to "sls3_launch.ks".
 
 // Only run firstboot when on launchpad or runway
 if ship:status = "prelaunch" {
-    set to_copy to lexicon().
-    to_copy:add("sls3_launch.ks", launch_script).
-    to_copy:add("circularize_orbit.ks", "circularize_orbit.ks").
+    set to_copy to list(
+        launch_script,
+        "circularize_orbit.ks",
+    ).
 
     runpath("0:/firstboot.ks", to_copy).
 }

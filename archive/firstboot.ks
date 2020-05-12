@@ -4,8 +4,7 @@
 // Copyright (C) 2020  Josh Gadeken
 // License: GPLv3
 
-// Lexicon of source archive file names and destination ship file names.
-// copy_files:add("<source file in archive>", "<destination file on ship>").
+// List of files to copy from the archive
 parameter copy_files.
 
 // Copy /lib/ directory to ship?
@@ -16,15 +15,14 @@ parameter incl_lib is true.
 print "Initializing " + ship:name + "...".
 
 if incl_lib {
-    // https://ksp-kos.github.io/KOS/commands/files.html#copypath-frompath-topath
-    copy_files:add("lib/", "lib/").
+    copy_files:add("lib/").
 }
 
 print "Copying files from Archive...".
-for f in copy_files:keys {
+for f in copy_files {
     set src to "0:/" + f.
-    print "'" + src + "' -> '" + copy_files[f] + "'".
-    copypath(src, copy_files[f]).
+    print "'" + src + "' -> '" + f + "'".
+    copypath(src, f).
 }
 
 print "done.".
