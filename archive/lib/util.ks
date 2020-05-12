@@ -27,3 +27,19 @@ function velocity_to_pitch {
 
     return round(map(current_velocity, velocity_min, velocity_max, pitch_min, pitch_max)).
 }
+
+
+// Return a list of all currently enabled engines
+function get_active_engines {
+    set ae to list().
+
+    // https://ksp-kos.github.io/KOS/structures/vessels/engine.html
+    list engines in engs.
+    for eng in engs {
+        if eng:availablethrust > 0 {
+            ae:add(eng).
+        }
+    }
+
+    return ae.
+}
