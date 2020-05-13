@@ -10,6 +10,7 @@ if ship:status = "prelaunch" {
     set to_copy to list(
         launch_script,
         "circularize_orbit.ks",
+        "exenode.ks"
     ).
 
     runpath("0:/firstboot.ks", to_copy).
