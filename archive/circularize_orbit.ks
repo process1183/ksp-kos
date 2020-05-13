@@ -52,3 +52,5 @@ print "Delta-V: " + round(delta_v, 2) + "m/s".
 set circularize_node to node(time():seconds + apsis_ref:eta, 0, 0, delta_v).
 add circularize_node.
 print "Maneuver node added to flight plan.".
+
+runpath("/exenode.ks").
