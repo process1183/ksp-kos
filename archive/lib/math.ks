@@ -18,6 +18,26 @@ function map {
 }
 
 
+// Wrapper around map() that clamps the output to out_min or out_max
+// if the input (x) is less than in_min or greater than in_max.
+function clamped_map {
+    parameter x. // the number to map
+    parameter in_min. // the lower bound of the value's current range
+    parameter in_max. // the upper bound of the value's current range
+    parameter out_min. // the lower bound of the value's target range
+    parameter out_max. // the upper bound of the value's target range
+
+    if x < in_min {
+        return out_min.
+    }
+    if x > in_max {
+        return out_max.
+    }
+
+    return map(x, in_min, in_max, out_min, out_max).
+}
+
+
 // vis-viva equation
 // https://en.wikipedia.org/wiki/Vis-viva_equation
 function vis_viva {

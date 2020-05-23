@@ -3,6 +3,7 @@
 // Copyright (C) 2020  Josh Gadeken
 // License: GPLv3
 
+runoncepath("/lib/math.ks").
 runoncepath("/lib/util.ks").
 
 
@@ -34,7 +35,7 @@ wait 0.5. // Delay to allow SRBs to actually fire
 until ship:maxthrust = 0 {
     // Gradually turn ship starting at 50m/s and 90 degrees, and stop
     // turning at 800m/s and 20 degrees
-    set pitch to velocity_to_pitch(ship:velocity:surface:mag, 50, 800, 90, 20).
+    set pitch to clamped_map(ship:velocity:surface:mag, 50, 800, 90, 20).
     WAIT 0.001.
 }
 
