@@ -21,3 +21,51 @@ function get_active_engines {
 
     return ae.
 }
+
+
+// Perform an action on engine modules with the specified nametag.
+// https://ksp-kos.github.io/KOS/structures/vessels/partmodule.html#method:PARTMODULE:DOACTION
+// https://ksp-kos.github.io/KOS/general/nametag.html
+function emod_action {
+    parameter nametag.
+    parameter action_name.
+    parameter action_bool.
+    parameter verbose.
+
+    for engine in ship:partstagged(nametag) {
+        if engine:hasmodule("ModuleEngines") {
+            set emod to engine:getmodule("ModuleEngines").
+        } else if engine:hasmodule("ModuleEnginesFX") {
+            set emod to engine:getmodule("ModuleEnginesFX").
+        } else {
+            print "Error! " + engine:tag + "does not have a 'ModuleEngines' or 'ModuleEnginesFX' module!".
+            return.
+        }
+
+        emod:doaction(action_name, action_bool).
+
+        if verbose {
+            print engine:tag + ": " + action_name + ": " + action_bool.
+        }
+    }
+}
+
+
+// Shutdown all engines with the specified nametag.
+// https://ksp-kos.github.io/KOS/general/nametag.html
+function shutdown_engine {
+    parameter nametag.
+    parameter verbose is false.
+
+    emod_action(nametag, "shutdown engine", true, verbose).
+}
+
+
+// Activate all engines with the specified nametag.
+// https://ksp-kos.github.io/KOS/general/nametag.html
+function activate_engine {
+    parameter nametag.
+    parameter verbose is false.
+
+    emod_action(nametag, "activate engine", true, verbose).
+}
