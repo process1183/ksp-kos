@@ -9,6 +9,7 @@ set launch_script to "sls3_launch.ks".
 if ship:status = "prelaunch" {
     set to_copy to list(
         launch_script,
+        "sls3_deploy_and_deorbit.ks",
         "circularize_orbit.ks",
         "exenode.ks"
     ).
