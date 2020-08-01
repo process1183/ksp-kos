@@ -69,3 +69,14 @@ function activate_engine {
 
     emod_action(nametag, "activate engine", true, verbose).
 }
+
+
+// Countdown from `t` to 0 in 1 second decrements
+function countdown {
+    parameter t.
+
+    from {local i is round(t).} until i <= 0 step {set i to i - 1.} do {
+        print "T-" + i.
+        wait 1.
+    }
+}
