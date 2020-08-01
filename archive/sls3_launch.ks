@@ -21,11 +21,7 @@ set pitch to 90.
 lock steering to lookdirup(heading(90, pitch):vector, ship:facing:topvector).
 lock throttle to 0.
 
-// Countdown
-from {local i is 10.} until i = 0 step {set i to i - 1.} do {
-    print "T-" + i.
-    wait 1.
-}
+countdown(10).
 
 stage. // Stage 3, SRBs
 print "Liftoff!".
