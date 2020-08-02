@@ -80,3 +80,51 @@ function countdown {
         wait 1.
     }
 }
+
+
+// Display `prompt` string and read user's keyboard input until
+// they press Enter.
+// Returns a string containing the user's typed characters.
+function user_input_prompt {
+    parameter prompt. // String to display before user input
+
+    print prompt.
+
+    set s to "".
+    set c to "".
+
+    until c = terminal:input:RETURN {
+        set c to terminal:input:getchar().
+        set s to s + c.
+
+        // Echo what the user is typing.
+        // This will print each character on a new line, as there is currently
+        // no way to suppress a newline in the print command.
+        // https://github.com/KSP-KOS/KOS/issues/2522
+        // https://github.com/KSP-KOS/KOS/issues/2524
+        print c.
+    }
+
+    print " ". // Print extra newline after done getting user input
+
+    return s:trim().
+}
+
+
+// Prompt the user for a compass direction (0-359).
+// This will keep asking until a valid direction is entered.
+// Returns a Scalar.
+function compass_direction_prompt {
+    // String to display before user input
+    parameter prompt is "Please type a compass direction (0-359) and press Enter:".
+
+    until 0 {
+        set d to user_input_prompt(prompt):tonumber(-1).
+
+        if d < 0 or d > 359 {
+            print "Invalid compass direction!".
+        } else {
+            return d.
+        }
+    }
+}
