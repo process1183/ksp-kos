@@ -23,29 +23,42 @@ function get_active_engines {
 }
 
 
-// Perform an action on engine modules with the specified nametag.
+// Perform an action on a module of a part tagged with `nametag`
 // https://ksp-kos.github.io/KOS/structures/vessels/partmodule.html#method:PARTMODULE:DOACTION
 // https://ksp-kos.github.io/KOS/general/nametag.html
-function emod_action {
+function part_module_action {
     parameter nametag.
+    parameter modlist. // List of module names to try `action_name` on
     parameter action_name.
     parameter action_bool.
+    parameter console_message.
     parameter verbose.
 
-    for engine in ship:partstagged(nametag) {
-        if engine:hasmodule("ModuleEngines") {
-            set emod to engine:getmodule("ModuleEngines").
-        } else if engine:hasmodule("ModuleEnginesFX") {
-            set emod to engine:getmodule("ModuleEnginesFX").
-        } else {
-            print "Error! " + engine:tag + "does not have a 'ModuleEngines' or 'ModuleEnginesFX' module!".
+    if console_message {
+        print console_message.
+    }
+
+    for prt in ship:partstagged(nametag) {
+        set prtmod to false.
+
+        for modname in modlist {
+            if prt:hasmodule(modname) {
+                set prtmod to prt:getmodule(modname).
+                if verbose {
+                    print "Found " + modname + " in " + prt:tag.
+                }
+            }
+        }
+
+        if not prtmod:istype("PartModule") {
+            print "Error! '" + prt:tag + "' does not have one of the specified modules!".
             return.
         }
 
-        emod:doaction(action_name, action_bool).
+        prtmod:doaction(action_name, action_bool).
 
         if verbose {
-            print engine:tag + ": " + action_name + ": " + action_bool.
+            print prt:tag + ": " + action_name + ": " + action_bool.
         }
     }
 }
@@ -55,9 +68,10 @@ function emod_action {
 // https://ksp-kos.github.io/KOS/general/nametag.html
 function shutdown_engine {
     parameter nametag.
+    parameter message is "".
     parameter verbose is false.
 
-    emod_action(nametag, "shutdown engine", true, verbose).
+    part_module_action(nametag, list("ModuleEngines", "ModuleEnginesFX"), "shutdown engine", true, message, verbose).
 }
 
 
@@ -65,9 +79,10 @@ function shutdown_engine {
 // https://ksp-kos.github.io/KOS/general/nametag.html
 function activate_engine {
     parameter nametag.
+    parameter message is "".
     parameter verbose is false.
 
-    emod_action(nametag, "activate engine", true, verbose).
+    part_module_action(nametag, list("ModuleEngines", "ModuleEnginesFX"), "activate engine", true, message, verbose).
 }
 
 
