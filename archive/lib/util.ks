@@ -106,6 +106,16 @@ function retract_solar_panels {
 }
 
 
+// Deploy all fairings tagged with `nametag`
+function deploy_fairing {
+    parameter nametag.
+    parameter message is "".
+    parameter verbose is false.
+
+    part_module_action(nametag, list("ModuleProceduralFairing"), "deploy", true, message, verbose).
+}
+
+
 // Countdown from `t` to 0 in 1 second decrements
 function countdown {
     parameter t.
