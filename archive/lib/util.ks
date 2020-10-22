@@ -143,3 +143,33 @@ function compass_direction_prompt {
         }
     }
 }
+
+
+// Return a list of the status strings for SRBs tagged with `nametag`
+function srb_status {
+    parameter nametag.
+
+    set srbs to list().
+    for srb in ship:partstagged(nametag) {
+        set srbm to srb:getmodule("ModuleEnginesFX").
+        srbs:add(srbm:getfield("status")).
+    }
+
+    return srbs.
+}
+
+
+// Return true if all SRBs tagged with `nametag` are in flame-out state.
+function is_srb_flameout {
+    parameter nametag.
+
+    set flameout to true.
+    for status in srb_status(nametag) {
+        if status <> "Flame-Out!" {
+            set flameout to false.
+            break.
+        }
+    }
+
+    return flameout.
+}
