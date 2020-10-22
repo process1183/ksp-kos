@@ -86,6 +86,26 @@ function activate_engine {
 }
 
 
+// Extend all solar panels tagged with `nametag`
+function extend_solar_panels {
+    parameter nametag.
+    parameter message is "".
+    parameter verbose is false.
+
+    part_module_action(nametag, list("ModuleDeployableSolarPanel"), "extend solar panel", true, message, verbose).
+}
+
+
+// Retract all solar panels tagged with `nametag`
+function retract_solar_panels {
+    parameter nametag.
+    parameter message is "".
+    parameter verbose is false.
+
+    part_module_action(nametag, list("ModuleDeployableSolarPanel"), "retract solar panel", true, message, verbose).
+}
+
+
 // Countdown from `t` to 0 in 1 second decrements
 function countdown {
     parameter t.
